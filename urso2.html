@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passeio do Urso</title>
+    <style>
+        body{
+            background: url("cenario.png") no-repeat center center fixed;
+            background-size: cover;
+        }
+        #imagem{
+            position: fixed;
+            top: 66%;
+            left: 0px;
+        }
+        .flip-image{
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        }
+    </style>
+</head>
+<body>
+    <img id="imagem" src="urso-1.png" width="70px">
+    <script type="text/javascript">
+        var ursos = ["urso-1.png", "urso-2.png", "urso-3.png"];
+        var indice = 0
+        distancia = 0
+        altura = 66
+        function moveRight(){
+                    imagem=document.getElementById("imagem");
+                    imagem.classList.remove("flip-image");
+                    imagem.src = ursos[indice];
+                    indice = (indice + 1) % 3;
+                    distancia += 5;
+                    imagem.style.left = distancia + "px";
+        }
+
+        function moveLeft(){
+                    imagem=document.getElementById("imagem");
+                    imagem.classList.add("flip-image");
+                    imagem.src = ursos[indice];
+                    indice = (indice + 1) % 3;
+                    distancia -= 5;
+                    imagem.style.left = distancia + "px";
+        }
+
+        function jump(){
+                    imagem=document.getElementById("imagem");
+                    imagem.src = ursos[0];
+                    if (w='keydonw'){
+                        altura-=2;
+                        imagem.style.top = altura + "%";
+                    }
+                    function desce(){
+                        altura+=2;
+                        imagem.style.top = altura + "%";
+                        }
+                        setTimeout(desce, 100);
+        }
+
+        function move(evento){
+            if (evento.key == 'd'){
+                moveRight();
+            } else if (evento.key == 'a'){
+                moveLeft();
+            } else if (evento.key == 'w'){
+                jump();
+            }
+        }
+
+        window.addEventListener('keydown',move);
+    </script>
+</body>
+</html>
